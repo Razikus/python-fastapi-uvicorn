@@ -1,0 +1,6 @@
+ARG pythonversion="3.7.4"
+ARG alpineversion="alpine3.10"
+FROM python:$pythonversion-$alpineversion as builder
+ARG uvicorn=0.8.6
+ARG fastapi=0.38.1
+RUN apk add --no-cache --virtual .build-deps libffi-dev gcc libc-dev make musl-dev && pip install fastapi==${fastapi} uvicorn==${uvicorn} && apk del .build-deps libffi-dev gcc libc-dev make musl-dev
